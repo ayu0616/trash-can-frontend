@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap");
+
+html {
+    touch-action: manipulation;
+}
+
+body {
+    margin: 0;
+
+    font-family: "BIZ UDPGothic", sans-serif;
+    line-height: 1.5rem;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

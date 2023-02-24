@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "globals";
+
+@layer components {
+    .button {
+        @apply px-4 py-3 rounded-lg no-select disabled:opacity-75;
+    }
+
+    .button-box {
+        @apply grid grid-flow-col;
+
+        > .button {
+            @apply rounded-none;
+            &:first-child {
+                @apply rounded-l-lg;
+            }
+            &:last-child {
+                @apply rounded-r-lg;
+            }
+        }
+    }
+}
+
+@layer utilities {
+    .button {
+        &.blue {
+            @apply text-white bg-blue-700 hover:bg-blue-800 active:bg-blue-900;
+        }
+
+        &.red {
+            @apply text-white bg-red-700 hover:bg-red-800 active:bg-red-900;
+        }
+
+        &.rose {
+            @apply text-white bg-rose-700 hover:bg-rose-800 active:bg-rose-900;
+        }
+    }
+}

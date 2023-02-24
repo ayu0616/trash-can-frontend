@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://trash-can-backend-zhqzb2nbkq-an.a.run.app/";
