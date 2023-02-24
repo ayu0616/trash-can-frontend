@@ -6,7 +6,7 @@ import PageTitle from "@/components/PageTitle";
 import { BACKEND_URL } from "@/util/constVars";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const title = "ボジョレーヌーボー・エセソムリエ生成器";
 
@@ -36,20 +36,57 @@ const Page = (props: { sentences: string[] }) => {
 
 const Content = (props: { sentences: string[] }) => {
     const [cnt, setCnt] = useState(0);
+    const sentence = useRef<HTMLParagraphElement>(null);
+
+    const fadeIn = () => {
+        const mSec = 1000;
+        sentence.current?.animate(
+            [
+                {
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                },
+            ],
+            {
+                duration: mSec,
+                easing: "ease-in-out",
+            }
+        );
+    };
 
     return (
         <>
             <MainContent>
-                <p className="text-xl h-full items-center w-full break-words flex flex-wrap text-center" style={{ fontFamily: '"Shippori Mincho B1", serif' }}>
+                <p
+                    className="text-xl h-full items-center w-full break-words flex flex-wrap text-center"
+                    style={{ fontFamily: '"Shippori Mincho B1", serif' }}
+                    ref={sentence}
+                >
                     {props.sentences[cnt]}
                 </p>
             </MainContent>
             <div className="px-3 py-6">
                 <ButtonBox>
-                    <Button onClick={() => setCnt((p) => p - 1)} disabled={cnt <= 0} color="rose">
+                    <Button
+                        onClick={() => {
+                            setCnt((p) => p - 1);
+                            fadeIn();
+                        }}
+                        disabled={cnt <= 0}
+                        color="rose"
+                    >
                         ←前のソムリエ
                     </Button>
-                    <Button onClick={() => setCnt((p) => p + 1)} disabled={cnt >= props.sentences.length - 1} color="rose">
+                    <Button
+                        onClick={() => {
+                            fadeIn();
+                            setCnt((p) => p + 1);
+                        }}
+                        disabled={cnt >= props.sentences.length - 1}
+                        color="rose"
+                    >
                         次のソムリエ→
                     </Button>
                 </ButtonBox>
