@@ -10,20 +10,19 @@ const AccordionTitle = (props: { children?: ReactNode }) => {
         setShow((p) => !p);
 
         const container = ref.current?.parentElement;
-        const item = container?.querySelector(".accordion-item");
+        const item = container?.querySelector<HTMLElement>(".accordion-item");
         const icon = ref.current?.querySelector(".accordion-icon");
         if (item) {
+            const scrollHeight = item.scrollHeight;
             if (show) {
                 container?.classList.remove("show");
-                item.classList.add("max-h-0");
-                item.classList.remove("max-h-96");
+                item.style.maxHeight = "0px";
                 ref.current?.classList.add("bg-slate-50");
                 ref.current?.classList.remove("bg-slate-200");
                 icon?.classList.add("rotate-[540deg]");
             } else {
                 container?.classList.add("show");
-                item.classList.remove("max-h-0");
-                item.classList.add("max-h-96");
+                item.style.maxHeight = `${scrollHeight}px`;
                 ref.current?.classList.remove("bg-slate-50");
                 ref.current?.classList.add("bg-slate-200");
                 icon?.classList.remove("rotate-[540deg]");
