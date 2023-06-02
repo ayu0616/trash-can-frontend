@@ -17,11 +17,11 @@ const pageData: PageData[] = [
             "ネットに転がっていた心理テストを学習したモデルが、あなたの心理を占います。デタラメのように感じますが、バーナム効果により全員に当てはまるものになっています！",
         link: "/psychological_test",
     },
-    {
-        title: "コピペ改変ツール",
-        description: "ネットで有名なコピペを自分好みに改変することが出来ます。",
-        link: "/copy_paste",
-    },
+    // {
+    //     title: "コピペ改変ツール",
+    //     description: "ネットで有名なコピペを自分好みに改変することが出来ます。",
+    //     link: "/copy_paste",
+    // },
 ];
 
 export default pageData;
