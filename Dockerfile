@@ -5,12 +5,12 @@ RUN apk add --no-cache nodejs npm
 
 WORKDIR /app/
 
-COPY package.json .
+# COPY package.json .
+COPY . .
 
 RUN npm install && \
     npm run build
 
-COPY . .
 
 EXPOSE 3000
 
