@@ -71,33 +71,37 @@ const Page = () => {
                     </PageTitle>
                 </div>
                 <MainContent>
-                    <div className="grow grid gap-4 place-content-center">
-                        <h3 className="text-lg text-center">設定</h3>
-                        <div className="flex gap-4 flex-wrap justify-center items-center">
-                            <p>基本設定：</p>
-                            {initOption.map((o, i) => {
-                                return (
-                                    <Checkbox
-                                        key={i}
-                                        color="rose"
-                                        onChange={(prev: boolean) => {
-                                            o.value = !prev;
-                                        }}
-                                        checked={o.value}
-                                    >
-                                        {o.name}
-                                    </Checkbox>
-                                );
-                            })}
+                    <div className="grow grid gap-6 place-content-center">
+                        {/* <h3 className="text-lg text-center">設定</h3> */}
+                        <div className="flex flex-col items-center gap-2">
+                            <p>【基本設定】</p>
+                            <div className="flex gap-4 flex-wrap justify-center items-center">
+                                {initOption.map((o, i) => {
+                                    return (
+                                        <Checkbox
+                                            key={i}
+                                            color="rose"
+                                            onChange={(prev: boolean) => {
+                                                o.value = !prev;
+                                            }}
+                                            checked={o.value}
+                                        >
+                                            {o.name}
+                                        </Checkbox>
+                                    );
+                                })}
+                            </div>
                         </div>
-                        <RadioContainer className="flex gap-4 flex-wrap justify-center items-center" value={gram} onChange={(nv) => setGram(nv as number)}>
-                            <p>文脈：</p>
-                            {gramOption.map(({ label, value }, i) => (
-                                <Radio color="rose" key={i} value={value}>
-                                    {label}
-                                </Radio>
-                            ))}
-                        </RadioContainer>
+                        <div className="flex flex-col items-center gap-2">
+                            <p>【文脈】</p>
+                            <RadioContainer className="flex gap-4 flex-wrap justify-center items-center" value={gram} onChange={(nv) => setGram(nv as number)}>
+                                {gramOption.map(({ label, value }, i) => (
+                                    <Radio color="rose" key={i} value={value}>
+                                        {label}
+                                    </Radio>
+                                ))}
+                            </RadioContainer>
+                        </div>
                     </div>
                 </MainContent>
                 <div className="px-3 py-6">
