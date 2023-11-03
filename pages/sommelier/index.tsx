@@ -15,7 +15,7 @@ const Page = () => {
     const router = useRouter();
 
     const generate = () => {
-        const url = new URL("/sommelier/generated", baseUrl);
+        const url = new URL("/sommelier/generated", location.origin);
         initOption.forEach((o) => url.searchParams.append(o.key, o.value.toString()));
         router.push(url.toString());
     };
