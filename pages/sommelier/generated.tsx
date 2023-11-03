@@ -79,7 +79,7 @@ const Content = (props: { sentences: string[] }) => {
             </MainContent>
             <div className="px-3 p-2 flex justify-end gap-3 items-center">
                 <p>SNSでシェアする：</p>
-                <TwitterShareButton url={shareUrl} title={shareText} hashtags={hashTags} via="hassaku_0616">
+                <TwitterShareButton url={shareUrl} title={shareText} hashtags={hashTags}>
                     <TwitterIcon size={36} round={true}></TwitterIcon>
                 </TwitterShareButton>
                 <LineShareButton url={shareUrl} title={shareText}>
