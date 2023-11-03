@@ -6,7 +6,7 @@ type PageData = {
 
 const pageData: { [key: string]: PageData } = {
     sommelier: {
-        title: "ボジョレーヌーボーエセソムリエ生成器",
+        title: "ボジョレーヌーボー・エセソムリエ生成器",
         description:
             "ボジョレーヌーボーのキャッチコピーを学習したモデルがエセソムリエのセリフを生成します。複数の設定があるので、組み合わせて楽しんでください！",
         link: "/sommelier",
