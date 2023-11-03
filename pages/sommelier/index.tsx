@@ -4,34 +4,46 @@ import Checkbox from "@/components/checkbox/CheckBox";
 import Layout from "@/components/layout/Layout";
 import MainContent from "@/components/layout/MainContent";
 import PageTitle from "@/components/PageTitle";
+import Radio from "@/components/radio/Radio";
+import RadioContainer from "@/components/radio/RadioContainer";
 import pageData from "@/data/page";
 import { baseUrl } from "@/data/url";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
-const {title, description} = pageData.sommelier
+const { title, description } = pageData.sommelier;
+
+const initOption = [
+    {
+        name: "ぐちゃぐちゃ",
+        key: "chaos",
+        value: false,
+    },
+    {
+        name: "ランダム年数",
+        key: "shuffle_year",
+        value: false,
+    },
+];
+
+const gramOption = [
+    { label: "大", value: 4 },
+    { label: "中", value: 3 },
+    { label: "小", value: 2 },
+];
 
 const Page = () => {
     const router = useRouter();
 
+    const [gram, setGram] = useState(gramOption[1].value);
+
     const generate = () => {
-        const url = new URL("/sommelier/generated", baseUrl);
+        const url = new URL("/sommelier/generated", location.origin);
         initOption.forEach((o) => url.searchParams.append(o.key, o.value.toString()));
+        url.searchParams.append("gram_n", gram.toString());
         router.push(url.toString());
     };
-
-    const initOption = [
-        {
-            name: "ぐちゃぐちゃ",
-            key: "chaos",
-            value: false,
-        },
-        {
-            name: "ランダム年数",
-            key: "shuffle_year",
-            value: false,
-        },
-    ];
 
     return (
         <>
@@ -61,7 +73,8 @@ const Page = () => {
                 <MainContent>
                     <div className="grow grid gap-4 place-content-center">
                         <h3 className="text-lg text-center">設定</h3>
-                        <div className="flex gap-4 flex-wrap justify-center">
+                        <div className="flex gap-4 flex-wrap justify-center items-center">
+                            <p>基本設定：</p>
                             {initOption.map((o, i) => {
                                 return (
                                     <Checkbox
@@ -70,12 +83,21 @@ const Page = () => {
                                         onChange={(prev: boolean) => {
                                             o.value = !prev;
                                         }}
+                                        checked={o.value}
                                     >
                                         {o.name}
                                     </Checkbox>
                                 );
                             })}
                         </div>
+                        <RadioContainer className="flex gap-4 flex-wrap justify-center items-center" value={gram} onChange={(nv) => setGram(nv as number)}>
+                            <p>文脈：</p>
+                            {gramOption.map(({ label, value }, i) => (
+                                <Radio color="rose" key={i} value={value}>
+                                    {label}
+                                </Radio>
+                            ))}
+                        </RadioContainer>
                     </div>
                 </MainContent>
                 <div className="px-3 py-6">
