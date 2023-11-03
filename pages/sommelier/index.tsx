@@ -4,16 +4,18 @@ import Checkbox from "@/components/checkbox/CheckBox";
 import Layout from "@/components/layout/Layout";
 import MainContent from "@/components/layout/MainContent";
 import PageTitle from "@/components/PageTitle";
+import pageData from "@/data/page";
+import { baseUrl } from "@/data/url";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const title = "ボジョレーヌーボー・エセソムリエ生成器";
+const {title, description} = pageData.sommelier
 
 const Page = () => {
     const router = useRouter();
 
     const generate = () => {
-        const url = new URL("/sommelier/generated", location.href);
+        const url = new URL("/sommelier/generated", baseUrl);
         initOption.forEach((o) => url.searchParams.append(o.key, o.value.toString()));
         router.push(url.toString());
     };
@@ -35,6 +37,14 @@ const Page = () => {
         <>
             <Head>
                 <title>{title}</title>
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:url" content={`${baseUrl}/sommelier`} />
+                <meta property="og:image" content={`${baseUrl}/ボジョレーサムネ.jpg`} />
+                <meta property="og:type" content="article" />
+                <meta property="og:site_name" content="はっさくのゴミ箱" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@hassaku_0616" />
             </Head>
             <Layout>
                 <div className="p-6">
