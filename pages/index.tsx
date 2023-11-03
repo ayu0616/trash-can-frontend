@@ -17,7 +17,7 @@ export default function Home() {
             <Layout>
                 <div className="h-[100%] bg-slate-100 py-3">
                     <CardContainer>
-                        {pageData.map((d, i) => {
+                        {Object.values(pageData).map((d, i) => {
                             return (
                                 <Link key={i} href={d.link}>
                                     <Card>
