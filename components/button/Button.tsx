@@ -17,7 +17,7 @@ const Button = (props: ButtonProps) => {
     }, [props.color]);
     return (
         <>
-            <button className={`button ${color} ${props.className}`} onClick={props.onClick} disabled={props.disabled}>
+            <button className={`button flex justify-center items-center ${color} ${props.className}`} onClick={props.onClick} disabled={props.disabled}>
                 {props.children}
             </button>
         </>
