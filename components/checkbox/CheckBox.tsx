@@ -18,7 +18,7 @@ const Checkbox = ({ children, onChange, checked, color }: CheckboxProps) => {
     };
     return (
         <>
-            <label htmlFor={uuid} className={["border button", colorClass].join(" ")}>
+            <label htmlFor={uuid} className={["border button cursor-pointer", colorClass].join(" ")}>
                 <input id={uuid} checked={_checked} onChange={handleChange} className="hidden" type="checkbox" />
                 {children}
             </label>

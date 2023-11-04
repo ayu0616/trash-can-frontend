@@ -18,7 +18,7 @@ const Radio = ({ children, color, ...props }: RadioProps) => {
     };
     return (
         <>
-            <label htmlFor={uuid} className={["border button", colorClass].join(" ")}>
+            <label htmlFor={uuid} className={["border button cursor-pointer", colorClass].join(" ")}>
                 <input id={uuid} checked={checked} onChange={handleChange} className="hidden" type="radio" name={name} {...props} />
                 {children}
             </label>

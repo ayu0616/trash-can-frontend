@@ -8,6 +8,8 @@ import Radio from "@/components/radio/Radio";
 import RadioContainer from "@/components/radio/RadioContainer";
 import pageData from "@/data/page";
 import { baseUrl } from "@/data/url";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -37,8 +39,11 @@ const Page = () => {
     const router = useRouter();
 
     const [gram, setGram] = useState(gramOption[1].value);
+    const [clicked, setClicked] = useState(false); // 生成ボタンを押したかどうか
 
     const generate = () => {
+        if (clicked) return;
+        setClicked(true);
         const url = new URL("/sommelier/generated", location.origin);
         initOption.forEach((o) => url.searchParams.append(o.key, o.value.toString()));
         url.searchParams.append("gram_n", gram.toString());
@@ -107,7 +112,15 @@ const Page = () => {
                 <div className="px-3 py-6">
                     <ButtonBox>
                         <Button onClick={generate} color="rose">
-                            生成する！
+                            {clicked ? (
+                                <>
+                                    {"　"}
+                                    <FontAwesomeIcon icon={faSpinner} className="animate-spin w-4 h-4" />
+                                    {"　"}
+                                </>
+                            ) : (
+                                "生成する！"
+                            )}
                         </Button>
                     </ButtonBox>
                 </div>
