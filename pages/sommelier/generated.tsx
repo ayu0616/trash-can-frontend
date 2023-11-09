@@ -1,12 +1,13 @@
+import PageTitle from "@/components/PageTitle";
 import Button from "@/components/button/Button";
 import ButtonBox from "@/components/button/ButtonBox";
 import Layout from "@/components/layout/Layout";
 import MainContent from "@/components/layout/MainContent";
-import PageTitle from "@/components/PageTitle";
 import { BACKEND_URL } from "@/util/constVars";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRef, useState } from "react";
+import { BsBoxArrowUp } from "react-icons/bs";
 import { LineIcon, LineShareButton, TwitterIcon, TwitterShareButton } from "react-share";
 
 const title = "ボジョレーヌーボー・エセソムリエ生成器";
@@ -66,6 +67,17 @@ const Content = (props: { sentences: string[] }) => {
         );
     };
 
+    const share = () => {
+        const data = {
+            title,
+            text: shareText,
+            url: shareUrl,
+        };
+        if (navigator.canShare && navigator.canShare(data)) {
+            navigator.share(data);
+        }
+    };
+
     return (
         <>
             <MainContent>
@@ -79,15 +91,18 @@ const Content = (props: { sentences: string[] }) => {
             </MainContent>
             <div className="px-3 p-2 flex justify-end gap-3 items-center">
                 <p>SNSでシェアする：</p>
-                <TwitterShareButton url={shareUrl} title={shareText} hashtags={hashTags}>
+                <TwitterShareButton url={shareUrl} title={shareText} hashtags={hashTags} className="hover:opacity-80 active:opacity-70">
                     <TwitterIcon size={36} round={true}></TwitterIcon>
                 </TwitterShareButton>
-                <LineShareButton url={shareUrl} title={shareText}>
+                <LineShareButton url={shareUrl} title={shareText} className="hover:opacity-80 active:opacity-70">
                     <LineIcon size={36} round={true}></LineIcon>
                 </LineShareButton>
                 {/* <FacebookShareButton url={shareUrl} quote={shareText}>
                     <FacebookIcon size={36} round={true}></FacebookIcon>
                 </FacebookShareButton> */}
+                <button className="w-9 h-9 text-3xl hover:text-black/60 active:text-black/40" onClick={share}>
+                    <BsBoxArrowUp></BsBoxArrowUp>
+                </button>
             </div>
             <div className="px-3 py-6">
                 <ButtonBox>
