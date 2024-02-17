@@ -133,7 +133,7 @@ const Content = (props: { sentences: string[] }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<{ sentences: string[] }> = async (context) => {
-    const url = context.resolvedUrl.replace("/sommelier/generated", BACKEND_URL + "/sommelier");
+    const url = context.resolvedUrl.replace("/sommelier/generated", BACKEND_URL + "/sommelier/");
     const sentences = await fetch(url).then((res) => res.json());
     return { props: { sentences } };
 };

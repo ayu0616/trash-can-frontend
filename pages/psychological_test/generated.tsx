@@ -25,6 +25,7 @@ type TestData = {
 
 const Page = (props: { data: TestData[] }) => {
     const [cnt, setCnt] = useState(0);
+    const { length } = props.data;
 
     const closeAll = async () => {
         const elems = document.querySelectorAll<HTMLElement>(".show > .accordion-title");
@@ -40,11 +41,16 @@ const Page = (props: { data: TestData[] }) => {
                 <title>{title}</title>
             </Head>
             <Layout>
-                <div className="p-6">
+                <div className="px-6 py-4">
                     <PageTitle>{title}</PageTitle>
                 </div>
                 <MainContent>
-                    <Lines className="mb-4">{props.data[cnt].question}</Lines>
+                    <div className="border rounded-md p-3 mb-4">
+                        <p className="font-bold mb-2">
+                            質問 {cnt + 1}/{length}
+                        </p>
+                        <Lines className="text-sm">{props.data[cnt].question}</Lines>
+                    </div>
                     <div>
                         {props.data[cnt].options.map((o, i) => (
                             <Accordion key={i}>
@@ -57,13 +63,13 @@ const Page = (props: { data: TestData[] }) => {
                                     <div className="mb-3">
                                         結果は<span className="text-xl font-bold inline-block">{props.data[cnt].result_summaries[i]}</span>です。
                                     </div>
-                                    <Lines>{props.data[cnt].result_bodies[i]}</Lines>
+                                    <Lines className="text-sm">{props.data[cnt].result_bodies[i]}</Lines>
                                 </AccordionItem>
                             </Accordion>
                         ))}
                     </div>
                 </MainContent>
-                <div className="w-full px-3 my-6">
+                <div className="w-full px-3 mb-6 mt-3">
                     <ButtonBox>
                         <Button
                             onClick={async () => {
